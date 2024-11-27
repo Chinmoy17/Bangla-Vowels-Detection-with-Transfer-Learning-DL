@@ -97,8 +97,8 @@ Model Summary:
 - **Test Loss**: 0.1440  
 
 ### Training Curves
-![Loss Curve](lossdense121.png)  
-![Accuracy Curve](accuracy_dense121.png)
+![Loss Curve](loss_curve.png)  
+![Accuracy Curve](acc_curve.png)
 
 ## How to Run
 
