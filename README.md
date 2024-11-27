@@ -1,5 +1,126 @@
-In this repo I have used Transfer Learning to detect Bangla Handwritten Vowels. I have used Deep Learning techniques to detect these alphabets. 
-The dataset is collected from EkushNet(https://www.sciencedirect.com/science/article/pii/S1877050918321355/pdf?crasolve=1&r=886e01ba1906ba4d&ts=1716225724721&rtype=https&vrr=UKN&redir=UKN&redir_fr=UKN&redir_arc=UKN&vhash=UKN&host=d3d3LnNjaWVuY2VkaXJlY3QuY29t&tsoh=d3d3LnNjaWVuY2VkaXJlY3QuY29t&rh=d3d3LnNjaWVuY2VkaXJlY3QuY29t&re=X2JsYW5rXw%3D%3D&ns_h=d3d3LnNjaWVuY2VkaXJlY3QuY29t&ns_e=X2JsYW5rXw%3D%3D&rh_fd=rrr)n%5Ed%60i%5E%60_dm%60%5Eo)%5Ejh&tsoh_fd=rrr)n%5Ed%60i%5E%60_dm%60%5Eo)%5Ejh&iv=c6053a9d8d8dadd6570de2194385118d&token=37353237393736393531363533313138333234376630326537346662353965363839313432383763306637356535383534636463363737613863313764393236303861626364313837353366646262656363313336656234643636303538306362613262333630623a353035373539396635613266646264306232323439363566&text=600f39e02f8fa1bd98aacaaaec6445f1a28893d3e985d43a9a399593ae1d683ab9402cb641eb500ae4901bbb7277fc5c1ed4dceaf809d4c0730e29b8f48b50bd4011daf69a5d91dfdd069d73eca6162450882fd226bc9501e2a3795fcf48974cf54bddcf12b69a085ce807138a7acece2448746a1460faecdc28f6a779c635f959a72301497781c78d1fb752dfc806066704961d9cc3ef2d04266ca1aa0871a47606beabe472e515a54a2776e985b70fa0f99d0a149047e52a98936d126a643c113db4401bdeb5052d30c67fab47937715cc01e31fdd0af87ea2e6dcfedc3b1bbbfb3f1f0b7bae55998eda731aea666068c45403b3c0cdc943a498f9f4d357b136f341b57abfd7f24f3ac8975cd05ce57868073dadc99aba6ae336251c6bdc2b93aec6889ad2ce02bf22aa562acfb331&original=3f6d64353d3238323733643361313934313936383436313639313164316162366531326662267069643d312d73322e302d53313837373035303931383332313335352d6d61696e2e706466)
+# Bangla Vowel Detection Using Deep Learning
 
-The preprocessing file is also included here. 
-The results were outstanding (97.76%) 
+## Overview
+
+This project demonstrates a deep learning-based approach to Bangla vowel detection using the Ekushe dataset. The solution leverages **ResNet50**, a pre-trained convolutional neural network, and data augmentation techniques to improve the model's performance.
+
+The notebook is designed to:
+- Preprocess Bangla vowel dataset images.
+- Train a deep learning model with advanced architectures.
+- Evaluate and visualize the performance of the trained model.
+- Predict vowel classes for new images.
+
+## Table of Contents
+
+1. [Dataset](#dataset)  
+2. [Dependencies](#dependencies)  
+3. [Workflow](#workflow)  
+4. [Model Architecture](#model-architecture)  
+5. [Results](#results)  
+6. [How to Run](#how-to-run)  
+7. [License](#license)
+
+## Dataset
+
+The dataset used for this project is the **Ekushe Bangla Alphabet Dataset**, organized into:
+
+- **Training Set**: Contains images of Bangla vowels for training the model.
+- **Testing Set**: Contains images for evaluating the trained model.
+
+Dataset structure:
+
+
+Each folder corresponds to a class label.
+
+## Dependencies
+
+The following Python libraries are required to run this project:
+
+
+numpy
+pandas
+matplotlib
+seaborn
+tensorflow
+keras
+opencv-python
+joblib
+tqdm
+
+To install all dependencies, use:pip install -r requirements.txt
+
+---
+
+### Cell 5: Workflow
+
+
+## Workflow
+
+### 1. Data Preprocessing
+- **Normalization**: Rescale pixel values to [0, 1].
+- **Noise Reduction**: Applied bilateral filtering.
+- **Pseudocoloring**: Applied `cv2.COLORMAP_BONE` for enhanced feature visualization.
+- **Resizing**: Images resized to 64x64 pixels for compatibility with ResNet50.
+
+### 2. Data Augmentation
+- Used **ImageDataGenerator** for random rotations, shifts, and flips to improve generalization.
+
+### 3. Model Training
+- Base model: **ResNet50** (pre-trained on ImageNet).
+- Top layers: Global Average Pooling, Dropout, and Dense layers.
+- Optimizer: Adam with learning rate 0.0001.
+- Loss Function: Categorical Crossentropy.
+
+### 4. Evaluation
+- Evaluated on test data using accuracy and loss metrics.
+- Visualized results with loss and accuracy curves.
+
+### 5. Prediction
+- Predicted class labels for new input images.
+
+## Model Architecture
+
+The model is based on ResNet50 with custom top layers added for classification. Key layers:
+
+1. Pre-trained ResNet50 base (without the fully connected layers).
+2. GlobalAveragePooling2D layer.
+3. Dropout (rate=0.4).
+4. Dense layer with softmax activation for classification into 11 classes.
+
+Model Summary:
+- Total Parameters: 23,610,251  
+- Trainable Parameters: 23,557,131  
+
+## Results
+
+- **Test Accuracy**: 97.76%  
+- **Test Loss**: 0.1440  
+
+### Training Curves
+![Loss Curve](lossdense121.png)  
+![Accuracy Curve](accuracy_dense121.png)
+
+## How to Run
+
+1. Clone the repository:
+
+
+   git clone https://github.com/<your-username>/bangla-vowel-detection.git
+   cd bangla-vowel-detection
+
+
+# Replace 'image_path' with the path to your image
+image_path = 'path/to/image.jpg'
+predictions = model.predict(image_path)
+print("Predicted class:", predictions)
+
+
+---
+
+### Cell 9: License
+
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
